@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantFacultyApplication.Repositories
 {
-    interface IResevatedTableRepository : IRepository<Resevated_table>
+    public interface IResevatedTableRepository : IRepository<Resevated_table>
     {
     }
 }

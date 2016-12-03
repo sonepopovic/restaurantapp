@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantFacultyApplication.Repositories
 {
-    interface IMealRepository : IRepository<Meal>
+    public interface IMealRepository : IRepository<Meal>
     {
     }
 }
