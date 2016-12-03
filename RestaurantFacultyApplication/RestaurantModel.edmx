@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RestaurantModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SURNAME" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="friend">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CUS_ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CUS_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Friend rating">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CUS_ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CUS_ID" Type="int" Nullable="false" />
+          <Property Name="COUNT" Type="int" Nullable="false" />
+          <Property Name="SUM" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invitation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RE_ID" Type="int" />
+          <Property Name="CUS_ID" Type="int" />
+          <Property Name="ACCEPTED" Type="bit" />
+          <Property Name="RATING" Type="int" />
+        </EntityType>
+        <EntityType Name="Meal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RES_ID" Type="int" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DECRIPTION" Type="text" />
+          <Property Name="PRICE" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OAuth2 account">
+          <Key>
+            <PropertyRef Name="OA_ID" />
+          </Key>
+          <Property Name="OA_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="OA_SOCIAL_NETWORK" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="OD_USER_ID" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="RE_ID" />
+          </Key>
+          <Property Name="RE_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CUS_ID" Type="int" Nullable="false" />
+          <Property Name="RE_DATE" Type="datetime" />
+          <Property Name="RE_LENGTH" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Resevated table">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="RE_ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RE_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="text" />
+          <Property Name="RATING_COUNT" Type="int" Nullable="false" />
+          <Property Name="RATING_SUM" Type="int" Nullable="false" />
+          <Property Name="LATITUDE" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="LONGITUDE" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Session token">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="USE_ID" Type="int" />
+          <Property Name="VALUE" Type="char" MaxLength="128" Nullable="false" />
+          <Property Name="EXPIRATION_DATE" Type="datetime" />
+          <Property Name="TYPE" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RES_ID" Type="int" Nullable="false" />
+          <Property Name="LABEL" Type="varchar" MaxLength="5" />
+          <Property Name="ROW" Type="int" Nullable="false" />
+          <Property Name="COLUMN" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RES_ID" Type="int" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ROLE" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ACTIVATED" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="RestaurantModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="friend" EntityType="Self.friend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Friend rating" EntityType="Self.Friend rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invitation" EntityType="Self.Invitation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meal" EntityType="Self.Meal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OAuth2 account" EntityType="Self.OAuth2 account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resevated table" EntityType="Self.Resevated table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Session token" EntityType="Self.Session token" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestaurantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="friend">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CUS_ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CUS_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Friend_rating">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CUS_ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CUS_ID" Type="Int32" Nullable="false" />
+          <Property Name="COUNT" Type="Int32" Nullable="false" />
+          <Property Name="SUM" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invitation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RE_ID" Type="Int32" />
+          <Property Name="CUS_ID" Type="Int32" />
+          <Property Name="ACCEPTED" Type="Boolean" />
+          <Property Name="RATING" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Meal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DECRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PRICE" Type="Single" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OAuth2_account">
+          <Key>
+            <PropertyRef Name="OA_ID" />
+          </Key>
+          <Property Name="OA_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="OA_SOCIAL_NETWORK" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="OD_USER_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="RE_ID" />
+          </Key>
+          <Property Name="RE_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CUS_ID" Type="Int32" Nullable="false" />
+          <Property Name="RE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="RE_LENGTH" Type="Int16" />
+        </EntityType>
+        <EntityType Name="Resevated_table">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="RE_ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RE_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RATING_COUNT" Type="Int32" Nullable="false" />
+          <Property Name="RATING_SUM" Type="Int32" Nullable="false" />
+          <Property Name="LATITUDE" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="LONGITUDE" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Session_token">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="USE_ID" Type="Int32" />
+          <Property Name="VALUE" Type="String" MaxLength="128" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EXPIRATION_DATE" Type="DateTime" Precision="3" />
+          <Property Name="TYPE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="LABEL" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ROW" Type="Int32" Nullable="false" />
+          <Property Name="COLUMN" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RES_ID" Type="Int32" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROLE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACTIVATED" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="RestaurantModelContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="friends" EntityType="Self.friend" />
+          <EntitySet Name="Friend_ratings" EntityType="Self.Friend_rating" />
+          <EntitySet Name="Invitations" EntityType="Self.Invitation" />
+          <EntitySet Name="Meals" EntityType="Self.Meal" />
+          <EntitySet Name="OAuth2_account" EntityType="Self.OAuth2_account" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Resevated_tables" EntityType="Self.Resevated_table" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+          <EntitySet Name="Session_tokens" EntityType="Self.Session_token" />
+          <EntitySet Name="Tables" EntityType="Self.Table" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestaurantModelStoreContainer" CdmEntityContainer="RestaurantModelContext">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="RestaurantModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="friends">
+            <EntityTypeMapping TypeName="RestaurantModel.friend">
+              <MappingFragment StoreEntitySet="friend">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CUS_ID" ColumnName="CUS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friend_ratings">
+            <EntityTypeMapping TypeName="RestaurantModel.Friend_rating">
+              <MappingFragment StoreEntitySet="Friend rating">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CUS_ID" ColumnName="CUS_ID" />
+                <ScalarProperty Name="COUNT" ColumnName="COUNT" />
+                <ScalarProperty Name="SUM" ColumnName="SUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invitations">
+            <EntityTypeMapping TypeName="RestaurantModel.Invitation">
+              <MappingFragment StoreEntitySet="Invitation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RE_ID" ColumnName="RE_ID" />
+                <ScalarProperty Name="CUS_ID" ColumnName="CUS_ID" />
+                <ScalarProperty Name="ACCEPTED" ColumnName="ACCEPTED" />
+                <ScalarProperty Name="RATING" ColumnName="RATING" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meals">
+            <EntityTypeMapping TypeName="RestaurantModel.Meal">
+              <MappingFragment StoreEntitySet="Meal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="DECRIPTION" ColumnName="DECRIPTION" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OAuth2_account">
+            <EntityTypeMapping TypeName="RestaurantModel.OAuth2_account">
+              <MappingFragment StoreEntitySet="OAuth2 account">
+                <ScalarProperty Name="OA_ID" ColumnName="OA_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OA_SOCIAL_NETWORK" ColumnName="OA_SOCIAL_NETWORK" />
+                <ScalarProperty Name="OD_USER_ID" ColumnName="OD_USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="RestaurantModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="RE_ID" ColumnName="RE_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CUS_ID" ColumnName="CUS_ID" />
+                <ScalarProperty Name="RE_DATE" ColumnName="RE_DATE" />
+                <ScalarProperty Name="RE_LENGTH" ColumnName="RE_LENGTH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resevated_tables">
+            <EntityTypeMapping TypeName="RestaurantModel.Resevated_table">
+              <MappingFragment StoreEntitySet="Resevated table">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RE_ID" ColumnName="RE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="RestaurantModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurant">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="RATING_COUNT" ColumnName="RATING_COUNT" />
+                <ScalarProperty Name="RATING_SUM" ColumnName="RATING_SUM" />
+                <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
+                <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Session_tokens">
+            <EntityTypeMapping TypeName="RestaurantModel.Session_token">
+              <MappingFragment StoreEntitySet="Session token">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USE_ID" ColumnName="USE_ID" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="EXPIRATION_DATE" ColumnName="EXPIRATION_DATE" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tables">
+            <EntityTypeMapping TypeName="RestaurantModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="LABEL" ColumnName="LABEL" />
+                <ScalarProperty Name="ROW" ColumnName="ROW" />
+                <ScalarProperty Name="COLUMN" ColumnName="COLUMN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RestaurantModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="ROLE" ColumnName="ROLE" />
+                <ScalarProperty Name="ACTIVATED" ColumnName="ACTIVATED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
