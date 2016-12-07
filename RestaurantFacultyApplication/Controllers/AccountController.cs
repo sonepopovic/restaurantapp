@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RestaurantFacultyApplication.Models;
+using RestaurantFacultyApplication.Unity_Of_Work;
 
 namespace RestaurantFacultyApplication.Controllers
 {
@@ -17,9 +18,11 @@ namespace RestaurantFacultyApplication.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext _context;
         public AccountController()
         {
+            _context = new ApplicationDbContext();
+            
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -139,6 +142,8 @@ namespace RestaurantFacultyApplication.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Name = new SelectList(_context.Roles.Where(u => !u.Name.Contains("ManagerOfSystem")&& !u.Name.Contains("Manager"))
+                                             .ToList(), "Name", "Name");
             return View();
         }
 
@@ -155,16 +160,29 @@ namespace RestaurantFacultyApplication.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    using (UnitOfWork unityOfWork = new UnitOfWork(new RestaurantModelContext()))
+                    {
+                        RestaurantFacultyApplication.User userDatabase = new User();
+                        userDatabase.EMAIL = model.Email;
+                        userDatabase.ROLE = model.UserRoles;
+                        userDatabase.ACTIVATED = false;
+                        userDatabase.PASSWORD = "";
+                        unityOfWork.Users.Add(userDatabase);
+                        unityOfWork.Complete();
+                    }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     return RedirectToAction("Index", "Home");
                 }
+                ViewBag.Name = new SelectList(_context.Roles.Where(u => !u.Name.Contains("ManagerOfSystem")&&!u.Name.Contains("Manager"))
+                                          .ToList(), "Name", "Name");
                 AddErrors(result);
             }
 
@@ -182,6 +200,18 @@ namespace RestaurantFacultyApplication.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
+            if (result.Succeeded)
+            {
+                using (UnitOfWork unityOfWork = new UnitOfWork(new RestaurantModelContext()))
+                {
+                    var user = _context.Users.Find(userId);
+                    User userFound = unityOfWork.Users.SingleOrDefault(user1 => user1.EMAIL == user.Email);
+                    userFound.ACTIVATED = true;
+                    unityOfWork.Users.Update(userFound);
+                    unityOfWork.Complete();
+                }
+                
+            }
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 

@@ -68,5 +68,10 @@ namespace RestaurantFacultyApplication.Persistence
             Context.Set<TEntity>().RemoveRange(entities);
         }
 
+        public void Update(TEntity entity)
+        {
+            Context.Entry(entity).State = EntityState.Modified;
+        }
+
     }
 }

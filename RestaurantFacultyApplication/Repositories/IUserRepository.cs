@@ -8,5 +8,6 @@ namespace RestaurantFacultyApplication.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
+
     }
 }

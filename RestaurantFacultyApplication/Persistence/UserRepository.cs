@@ -9,6 +9,13 @@ namespace RestaurantFacultyApplication.Persistence
     {
         public UserRepository(RestaurantModelContext context) : base(context)
         {
+            
         }
+        public RestaurantModelContext RestaurantModelContext
+        {
+            get { return Context as RestaurantModelContext; }
+        }
+
+
     }
 }
