@@ -8,6 +8,7 @@ namespace RestaurantFacultyApplication.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-
+        IEnumerable<User> GetAllManagers();
+        User FindUserByEmail(string email);
     }
 }

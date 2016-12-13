@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace RestaurantFacultyApplication
 {
     using System;
@@ -14,8 +16,11 @@ namespace RestaurantFacultyApplication
     
     public partial class Customer
     {
+        
         public int ID { get; set; }
+        [Display(Name = "Name")]
         public string NAME { get; set; }
+        [Display(Name = "Surname")]
         public string SURNAME { get; set; }
     }
 }

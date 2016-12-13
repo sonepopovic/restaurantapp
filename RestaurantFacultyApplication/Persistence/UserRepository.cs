@@ -16,6 +16,14 @@ namespace RestaurantFacultyApplication.Persistence
             get { return Context as RestaurantModelContext; }
         }
 
+        public IEnumerable<User> GetAllManagers()
+        {
+            return RestaurantModelContext.Users.Where(u => !u.ROLE.Contains("ManagerOfSystem") && !u.ROLE.Contains("Guest"));
+        }
 
+        public User FindUserByEmail(string email)
+        {
+            return RestaurantModelContext.Users.SingleOrDefault(a=>a.EMAIL==email);
+        }
     }
 }

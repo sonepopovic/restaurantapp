@@ -1,0 +1,54 @@
+﻿@model IEnumerable<RestaurantFacultyApplication.Models.CustomersItem>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add or Delete Friends</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @if (item.Friend)
+            {
+                using (Html.BeginForm("AddRemoveFriendConfirmed", "Customer", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("action", "remove")
+                    @Html.Hidden("id", item.Id)
+                    <input type="submit" value="Remove " class="btn btn-default btn-info" />
+                }
+            }
+            else
+            {
+                using (Html.BeginForm("AddRemoveFriendConfirmed", "Customer", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("action", "add")
+                    @Html.Hidden("id", item.Id)
+
+                    <input type="submit" value="Add " class="btn btn-default btn-info" />
+
+
+                }
+            }
+
+        </td>
+
+    </tr>
+}
+
+</table>

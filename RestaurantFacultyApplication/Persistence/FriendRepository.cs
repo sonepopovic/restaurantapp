@@ -15,5 +15,16 @@ namespace RestaurantFacultyApplication.Persistence
         {
             get { return Context as RestaurantModelContext; }
         }
+
+        public IEnumerable<friend> GetAllFriendsForUser(int userId)
+        {
+            return RestaurantModelContext.friends.Where(x => x.ID == userId);
+        }
+
+        public void RemoveFromFriends(int userId, int friendId)
+        {
+            friend elementForDelete = RestaurantModelContext.friends.Find(userId, friendId);
+            RestaurantModelContext.friends.Remove(elementForDelete);
+        }
     }
 }

@@ -15,5 +15,7 @@ namespace RestaurantFacultyApplication.Persistence
         {
             get { return Context as RestaurantModelContext; }
         }
+
+        
     }
 }

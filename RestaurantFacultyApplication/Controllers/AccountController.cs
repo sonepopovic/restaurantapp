@@ -82,7 +82,8 @@ namespace RestaurantFacultyApplication.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Welcome");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -169,6 +170,14 @@ namespace RestaurantFacultyApplication.Controllers
                         userDatabase.PASSWORD = "";
                         unityOfWork.Users.Add(userDatabase);
                         unityOfWork.Complete();
+                        if (userDatabase.ROLE.Equals("Guest"))
+                        {
+                            Customer newCustomer = new Customer();
+                            newCustomer.NAME = userDatabase.EMAIL.Split('@')[0];
+                            newCustomer.SURNAME = "";
+                            newCustomer.ID = unityOfWork.Users.FindUserByEmail(userDatabase.EMAIL).ID;
+                            unityOfWork.Customers.Add(newCustomer);
+                        }
                     }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 

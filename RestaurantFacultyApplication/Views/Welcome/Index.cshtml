@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+
+@if (ViewBag.displayMenu == "Yes")
+{
+    <h1>Welcome Manager of System. You can do whatever you want! :). For example create a new managers and give to them restaurants. </h1>
+    <h3>
+        <li>@Html.ActionLink("Manage Role", "Index", "Users")</li>
+    </h3>
+}
+else
+{
+    <h2>  Welcome <strong>@ViewBag.Name</strong> :) .We will add user module soon </h2>
+}

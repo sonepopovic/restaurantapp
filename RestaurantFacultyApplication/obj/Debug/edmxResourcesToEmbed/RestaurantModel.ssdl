@@ -59,8 +59,8 @@
     <Key>
       <PropertyRef Name="RE_ID" />
     </Key>
-    <Property Name="RE_ID" Type="int" Nullable="false" />
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="CUS_ID" Type="int" Nullable="false" />
     <Property Name="RE_DATE" Type="datetime" />
     <Property Name="RE_LENGTH" Type="smallint" />

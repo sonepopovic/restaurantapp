@@ -1,0 +1,81 @@
+﻿@model RestaurantFacultyApplication.Models.TablesArrangement
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit table arrangement in restaurant @ViewBag.Title</h2>
+
+<table class="table" >
+    
+
+    @for (int i = 0; i < 10; i++)
+    {
+        <tr>
+            @for (int j = 0; j < 10; j++)
+            {
+                <td>
+                    @if (!(Model.Arrangement.ContainsKey(i) && Model.Arrangement[i].ContainsKey(j)))
+                    {
+                        using (Html.BeginForm("TablesArangementConfirmed", "Tables", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("action", "add")
+                            ;
+                            @Html.Hidden("i", i)
+                            ;
+                            @Html.Hidden("j", j)
+                            ;
+                            
+                                    <input type="submit" value="Add table" class="btn btn-default btn-primary"/>
+                                
+
+                        }
+                    }
+                    else
+                    {
+                        if (Model.Arrangement[i][j] == null)
+                        {
+                            using (Html.BeginForm("TablesArangementConfirmed", "Tables", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("action", "add")
+                                ;
+                                @Html.Hidden("i", i)
+                                ;
+                                @Html.Hidden("j", j)
+                                ;
+                                    
+                                        <input type="submit" value="Add table" class="btn btn-default btn-primary" />
+                                    
+                                
+                            }
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("TablesArangementConfirmed", "Tables", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("action", "remove")
+                                ;
+                                @Html.Hidden("i", i)
+                                ;
+                                @Html.Hidden("j", j)
+                                ;
+
+                                        <input type="submit" value="Remove table" class="btn btn-default btn-danger" />
+
+
+                            }
+                        }
+                    }
+                    
+
+
+
+                </td>
+            }
+        </tr>
+    }
+
+</table>

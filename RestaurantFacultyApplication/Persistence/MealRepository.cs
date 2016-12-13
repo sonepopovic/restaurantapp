@@ -14,5 +14,12 @@ namespace RestaurantFacultyApplication.Persistence
         {
             get { return Context as RestaurantModelContext; }
         }
+
+        public IEnumerable<Meal> GetAllMealsForRestaurant(int resId)
+        {
+            
+            return RestaurantModelContext.Meals.ToList().Where(a => a.RES_ID == resId);
+                           
+        }
     }
 }

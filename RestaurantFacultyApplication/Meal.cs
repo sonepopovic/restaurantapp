@@ -7,17 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace RestaurantFacultyApplication
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Meal
     {
         public int ID { get; set; }
+        [Display(Name = "Restaurant")]
         public int RES_ID { get; set; }
+        [Display(Name = "Name")]
         public string NAME { get; set; }
+        [Display(Name = "Description")]
         public string DECRIPTION { get; set; }
+        [Display(Name = "Price")]
         public float PRICE { get; set; }
     }
 }

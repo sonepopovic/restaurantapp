@@ -8,5 +8,6 @@ namespace RestaurantFacultyApplication.Repositories
 {
     public interface IMealRepository : IRepository<Meal>
     {
+        IEnumerable<Meal> GetAllMealsForRestaurant(int resId);
     }
 }

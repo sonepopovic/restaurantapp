@@ -1,0 +1,53 @@
+﻿@model RestaurantFacultyApplication.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RES_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RES_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ROLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ROLE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACTIVATED)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ACTIVATED)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Change Restaurant", "ManagerToRest", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

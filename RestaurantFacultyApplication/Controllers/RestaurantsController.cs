@@ -7,11 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RestaurantFacultyApplication;
+using RestaurantFacultyApplication.Models;
 using RestaurantFacultyApplication.Persistence;
 using RestaurantFacultyApplication.Unity_Of_Work;
 
 namespace RestaurantFacultyApplication.Controllers
 {
+    [Authorize]
     public class RestaurantsController : Controller
     {
        
@@ -162,6 +164,29 @@ namespace RestaurantFacultyApplication.Controllers
             }
            
            
+        }
+        // GET: Restaurants/Reservate/5
+        public ActionResult Reservate(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (var unitOfWork = new UnitOfWork(new RestaurantModelContext()))
+            {
+                Restaurant restaurant = unitOfWork.Restaurants.Get((int)id);
+                if (restaurant == null)
+                {
+                    return HttpNotFound();
+                }
+                ReservationParameters model = new ReservationParameters();
+                model.Name = restaurant.NAME;
+                model.Id = restaurant.ID;                
+                return View(model);
+            }
+
+
         }
 
         protected override void Dispose(bool disposing)

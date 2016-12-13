@@ -198,9 +198,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MealsController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
+    <Compile Include="Controllers\TablesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WelcomeController.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -220,8 +226,13 @@
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CustomersItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManagerRestaurantViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ReservationParameters.cs" />
+    <Compile Include="Models\ShowReservation.cs" />
+    <Compile Include="Models\TablesArrangement.cs" />
     <Compile Include="OAuth2_account.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
@@ -370,9 +381,27 @@
     <Content Include="Views\Restaurants\Details.cshtml" />
     <Content Include="Views\Restaurants\Edit.cshtml" />
     <Content Include="Views\Restaurants\Index.cshtml" />
+    <Content Include="Views\Welcome\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\ManagerToRest.cshtml" />
+    <Content Include="Views\Meals\Create.cshtml" />
+    <Content Include="Views\Meals\Delete.cshtml" />
+    <Content Include="Views\Meals\Details.cshtml" />
+    <Content Include="Views\Meals\Edit.cshtml" />
+    <Content Include="Views\Meals\Index.cshtml" />
+    <Content Include="Views\Tables\TablesArrangement.cshtml" />
+    <Content Include="Views\Restaurants\Reservate.cshtml" />
+    <Content Include="Views\Tables\ShowFreeTables.cshtml" />
+    <Content Include="Views\Tables\TableReservationConfirmed.cshtml" />
+    <Content Include="Views\Customer\Customers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Reservation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

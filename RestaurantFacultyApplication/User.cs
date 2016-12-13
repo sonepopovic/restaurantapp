@@ -7,18 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace RestaurantFacultyApplication
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class User
     {
+        [Display(Name = "Id")]
         public int ID { get; set; }
+        [Display(Name = "Restaurant")]
         public Nullable<int> RES_ID { get; set; }
+        [Display(Name = "Email")]
         public string EMAIL { get; set; }
+        [Display(Name = "Password")]
+        [DataType(DataType.Password)]
         public string PASSWORD { get; set; }
+        [Display(Name = "Role")]
         public string ROLE { get; set; }
+        [Display(Name = "Activated")]
         public Nullable<bool> ACTIVATED { get; set; }
     }
 }

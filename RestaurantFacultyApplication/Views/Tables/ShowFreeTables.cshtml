@@ -1,0 +1,76 @@
+﻿@model RestaurantFacultyApplication.Models.TablesArrangement
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit table arrangement in restaurant @ViewBag.Title</h2>
+
+<table class="table">
+
+
+    @for (int i = 0; i < 10; i++)
+    {
+        <tr>
+            @for (int j = 0; j < 10; j++)
+            {
+                <td>
+                    @if (!(Model.Arrangement.ContainsKey(i) && Model.Arrangement[i].ContainsKey(j)))
+                    {
+                        using (Html.BeginForm("TableReservationConfirmed", "Tables", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("action", "reservate")
+                            @Html.Hidden("i", i)
+                            @Html.Hidden("j", j)
+                            
+                            <input type="button" value="Can't reservate" class="btn btn-default btn-info disabled" />
+
+
+                        }
+                    }
+                    else
+                    {
+                        if (Model.Arrangement[i][j] == null)
+                        {
+                            using (Html.BeginForm("TableReservationConfirmed", "Tables", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("action", "reservate");
+                                @Html.Hidden("i", i);
+                                @Html.Hidden("j", j);
+
+                                <input type="button" value="Can't reservate" class="btn btn-default btn-info disabled" />
+
+
+                            }
+                        }
+                        else
+                        {
+                            using (Html.BeginForm("TableReservationConfirmed", "Tables", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("action", "reservate");
+                                @Html.Hidden("i", i);
+                                @Html.Hidden("j", j);
+                                @Html.Hidden("table",Model.Arrangement[i][j].ID)
+                                @Html.Hidden("restime",Model.ReservationParameters.ReservationTime)
+                                @Html.Hidden("duration", Model.ReservationParameters.Duration)
+                                @Html.Hidden("resid", Model.ReservationParameters.Id)
+
+                                <input type="submit" value="Reservate table" class="btn btn-default btn-danger" />
+
+
+                            }
+                        }
+                    }
+
+
+
+
+                </td>
+            }
+        </tr>
+    }
+
+</table>

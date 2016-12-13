@@ -1,3 +1,4 @@
+D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\obj\Debug\RestaurantFacultyApplication.csprojResolveAssemblyReference.cache
 D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\bin\ApplicationInsights.config
 D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\bin\roslyn\csc.exe
 D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -77,6 +78,5 @@ D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\bin\Micr
 D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\bin\Microsoft.Owin.Security.Google.xml
 D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\obj\Debug\RestaurantFacultyApplication.csprojResolveAssemblyReference.cache
 D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\obj\Debug\RestaurantFacultyApplication.dll
 D:\Restaurant\RestaurantFacultyApplication\RestaurantFacultyApplication\obj\Debug\RestaurantFacultyApplication.pdb
